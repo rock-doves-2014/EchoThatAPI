@@ -15,6 +15,7 @@ require 'dotenv'
 # you've limited to :test, :development, or :production.
 
 
+
 module EchoThat
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
