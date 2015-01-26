@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150125203059) do
+ActiveRecord::Schema.define(version: 20150125234434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 20150125203059) do
     t.boolean "always_link"
     t.string  "twitter_token"
     t.string  "twitter_token_secret"
+    t.integer "twitter_id"
+    t.string  "twitter_name"
   end
 
 end
