@@ -3,13 +3,10 @@ class EchosController < ApplicationController
 
   def create
     hashtext = JSON.parse(params.first[0])
-
-    p hashtext["message"]
-    p hashtext["url"]
-
-    echo = EchoFactory.construct_echo(params[:echo])
-    echo.save
-    render text: echo
+    text = hashtext["message"]
+    url = hashtext["url"]
+    $client.update("#{text} - #{url}")
+    return 200
   end
 
   def new
