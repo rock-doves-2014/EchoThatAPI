@@ -20,4 +20,12 @@ RSpec.describe UsersController, :type => :controller do
     expect(user_attribs - args.keys).to eq []
   end
 
+  it "saves a User" do
+    expect{
+      post :create, user: attributes_for(:valid_user)
+    }. to change(User, :count).by 1
+  end
+
+  it "saves a User with the proper default values"
+
 end
