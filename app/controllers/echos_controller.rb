@@ -1,9 +1,12 @@
 class EchosController < ApplicationController
+  skip_before_filter :verify_authenticity_token
 
   def create
-    echo = EchoFactory.construct_echo(params[:echo])
-    echo.save
-    render text: echo
+    hashtext = JSON.parse(params.first[0])
+    text = hashtext["message"]
+    url = hashtext["url"]
+    $client.update("#{text} - #{url}")
+    return 200
   end
 
   def new
