@@ -18,11 +18,12 @@ ActiveRecord::Schema.define(version: 20150125065311) do
 
   create_table "echos", force: :cascade do |t|
     t.integer "user_id"
-    t.string  "echo_type"
+    t.string  "sent_to_venue"
     t.text    "user_text"
     t.text    "selected_string"
     t.string  "long_url"
     t.string  "short_url"
+    t.boolean "is_draft"
   end
 
   create_table "users", force: :cascade do |t|
@@ -30,8 +31,8 @@ ActiveRecord::Schema.define(version: 20150125065311) do
     t.string  "facebook_acct"
     t.boolean "twitter_on"
     t.boolean "facebook_on"
-    t.text    "drafts"
-    t.text    "history"
+    t.integer "facebook_char_floor"
+    t.boolean "always_link"
   end
 
 end
