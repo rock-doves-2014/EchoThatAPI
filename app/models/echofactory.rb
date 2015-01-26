@@ -22,7 +22,8 @@ module EchoFactory
 
   def self.shorten_url(long_url)
     clean_url = sanitize_url(long_url)
-    return Bitly.client.shorten(long_url).short_url
+    return clean_url
+    #restore shorten in the distant future
   end
 
   def self.sanitize_url(url)
