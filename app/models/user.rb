@@ -14,6 +14,13 @@ class User < ActiveRecord::Base
     return args
   end
 
+  def accounts
+    accounts = []
+    accounts << twitter_acct
+    accounts << facebook_acct
+    return accounts.compact
+  end
+
   private
 
   def self.sanitize_json(json_params)
