@@ -2,9 +2,12 @@ class EchosController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create
-    hashtext = JSON.parse(params.first[0])
-    text = hashtext["message"]
-    url = hashtext["url"]
+    args = Echo.to_args(params.first[0])
+
+
+    # hashtext = JSON.parse(params.first[0])
+    # text = hashtext["message"]
+    # url = hashtext["url"]
     $client.update("#{text} - #{url}")
     return 200
   end
