@@ -13,4 +13,9 @@ class EchosController < ApplicationController
     @echo = Echo.new
   end
 
+  def show
+    #will be User.get_by_credentials(params)
+    render text: "Placeholder for latest echo body"
+  end
+
 end

@@ -21,6 +21,11 @@ class User < ActiveRecord::Base
     return accounts.compact
   end
 
+  def self.get_by_credentials(json_params)
+    creds = JSON.parse(params.first[0])["google_credentials"]
+    User.find_by(google_credentials: creds)
+  end
+
   private
 
   def self.sanitize_json(json_params)
