@@ -27,7 +27,6 @@ class User < ActiveRecord::Base
     hash = JSON.parse(json_params.first[0])
     safe_args = {}
 
-    safe_args[:google_credentials] = hash.fetch("google_credentials", nil)
     safe_args[:twitter_on] = hash.fetch("twitter_on", true)
     safe_args[:facebook_on] = hash.fetch("facebook_on", true)
     safe_args[:facebook_char_floor] = hash.fetch("facebook_char_floor", true)
