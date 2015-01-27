@@ -15,7 +15,7 @@ RSpec.describe UsersController, :type => :controller do
   end
 
   it "format the params into a hash that contains all required user attributes" do
-    args = UserJSONCleaner.to_args(params)
+    args = User.to_args(params)
     user_attribs = User.new.attributes.keys
     expect(user_attribs - args.keys).to eq []
   end

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post '/api/echos' => 'echos#create'
   post '/api/users' => 'users#create'
 
+  get '/o/:short_url' => 'echos#expand', as:'expand'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -3,8 +3,9 @@ FactoryGirl.define do
 
     factory :valid_user do
       google_credentials "gmailjane"
+      chrome_token {User.generate_token}
       always_link false
-      facebook_floor 140
+      facebook_char_floor 140
     end
 
     factory :invalid_user do
