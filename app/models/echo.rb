@@ -21,7 +21,7 @@ class Echo < ActiveRecord::Base
 
   def self.short_url
     salt = (0..5).map{|n| rand(36).to_s(36) }.join
-    "#{url_redirect_path}/#{salt}"
+    expand_url(salt)
   end
 
   def self.sanitize_url(url)
