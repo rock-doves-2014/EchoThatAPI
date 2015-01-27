@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  match 'auth/:provider/callback', to: 'users#create', via: 'get'
+  match 'auth/:provider/callback', to: 'users#update', via: 'put'
   match 'auth/failure', to: redirect('/'), via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'echos#new'
   post '/api/echos' => 'echos#create'
+  post '/api/users' => 'users#create'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

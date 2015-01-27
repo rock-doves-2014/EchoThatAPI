@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150126193741) do
+ActiveRecord::Schema.define(version: 20150127022526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,9 @@ ActiveRecord::Schema.define(version: 20150126193741) do
     t.integer "twitter_id"
     t.string  "twitter_name"
     t.text    "google_credentials"
+    t.string  "chrome_token"
   end
+
+  add_index "users", ["chrome_token"], name: "index_users_on_chrome_token", unique: true, using: :btree
 
 end
