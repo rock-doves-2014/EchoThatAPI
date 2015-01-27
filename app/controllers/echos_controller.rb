@@ -17,8 +17,8 @@ class EchosController < ApplicationController
   end
 
   def expand
-    @echo = Echo.find_by(short_url: expand_path(params[:id]) )
-    redirect_do @echo[:long_url]
+    @echo = Echo.find_by(short_url: params[:short_url] )
+    redirect_to @echo.long_url
   end
 
 end
