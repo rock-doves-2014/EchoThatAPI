@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
     return json_hashified.select{|k,v| permitted.include?(k.to_s)}
   end
 
-  def generate_token
+  def self.generate_token
     ary = (0..9).to_a + ('a'..'z').to_a
     ary.shuffle.slice(0, 25).join
   end
