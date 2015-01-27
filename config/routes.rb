@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   root 'echos#new'
   post '/api/echos' => 'echos#create'
   post '/api/users' => 'users#create'
-  get '/api/echos/last' => 'echos#show'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
