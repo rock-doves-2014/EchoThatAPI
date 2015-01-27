@@ -1,8 +1,17 @@
 class Echo < ActiveRecord::Base
+  validates_uniqueness_of :short_url
+  after_create :make_short_url
+
   belongs_to :user
 
   def self.to_args(json_params)
     args = self.sanitize_json(json_params)
+  end
+
+  def make_short_url
+    salt = (0..5).map{|n| rand(36).to_s(36) }.join
+    id_part = self.id.to_s(36).upcase
+    self.update_attribute(:short_url, salt + id_part)
   end
 
   private
@@ -14,14 +23,8 @@ class Echo < ActiveRecord::Base
     hash[:body] = received.fetch("body", "")
 
     hash[:long_url] = self.sanitize_url( received.fetch("url") )
-    hash[:short_url] = self.short_url
 
     return hash
-  end
-
-  def self.short_url
-    salt = (0..5).map{|n| rand(36).to_s(36) }.join
-    expand_url(salt)
   end
 
   def self.sanitize_url(url)

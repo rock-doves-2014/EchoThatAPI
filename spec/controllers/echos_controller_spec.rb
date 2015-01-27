@@ -7,6 +7,5 @@ RSpec.describe EchosController, :type => :controller do
     get :expand, short_url: echo.short_url
     expect(assigns(:echo)).to eq echo
     expect(response).to redirect_to "https://www.google.com"
-    echo.destroy
   end
 end
