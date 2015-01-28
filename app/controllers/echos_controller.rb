@@ -9,7 +9,7 @@ class EchosController < ApplicationController
     # text = hashtext["message"]
     # url = hashtext["url"]
     $client.update("#{text} - #{url}")
-    return 200
+    render status: 200
   end
 
   def new

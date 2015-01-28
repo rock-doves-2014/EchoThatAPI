@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  match 'auth/:provider/callback', to: 'users#update', via: 'put'
+  match 'auth/:provider/callback', to: 'users#update', via: 'get'
   match 'auth/failure', to: redirect('/'), via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
