@@ -6,6 +6,7 @@ FactoryGirl.define do
       chrome_token {User.generate_token}
       always_link false
       facebook_char_floor 140
+      twitter_acct "follaback"
     end
 
     factory :invalid_user do
