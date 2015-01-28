@@ -21,16 +21,23 @@ class Echo < ActiveRecord::Base
 
   def self.build_for_each_outlet(outlets, args)
     echos = []
-    outlets.each do |account|
+    outlets.each do |site|
       unless args[:is_draft]
         to_send = Echo.new(Echo.echo_params(args))
-        to_send.sent_to_account = account
+        to_send.send_to_venue = site
         echos << to_send
       end
       draft = Echo.new(echo_params(args))
       echos << draft
     end
     echos
+  end
+
+  def update_if_twitter(client)
+    if !(is_draft) && send_to_venue == "twitter"
+      client.update("#{body} #{short_url}")
+    end
+    return send_to_venue
   end
 
   private

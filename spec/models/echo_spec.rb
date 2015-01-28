@@ -31,13 +31,12 @@ RSpec.describe Echo, :type => :model do
   end
 
   it "can generate an array of echos to different venues" do
-    before = Echo.all.count
     args = Echo.to_args(params)
     user = create(:valid_user)
     outlets = user.accounts
     echos = Echo.build_for_each_outlet(outlets, args)
     echos.each{|e| e.save}
-    expect(Echo.all.count > before).to be true
+    expect(echos.select{|e|e.send_to_venue == "twitter"}[0]).to be_a Echo
     expect(echos).to be_a Array
   end
 
