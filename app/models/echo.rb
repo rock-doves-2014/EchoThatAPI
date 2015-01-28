@@ -22,7 +22,7 @@ class Echo < ActiveRecord::Base
     hash[:is_draft] = received.fetch("is_draft", true)
     hash[:body] = received.fetch("body", "")
 
-    hash[:long_url] = self.sanitize_url( received.fetch("url") )
+    hash[:long_url] = received.sanitize_url( received.fetch("url") )
 
     return hash
   end

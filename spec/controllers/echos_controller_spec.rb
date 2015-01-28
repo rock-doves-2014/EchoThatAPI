@@ -10,7 +10,9 @@ RSpec.describe EchosController, :type => :controller do
   end
 
   it "creates a new echo with correct defaults" do
-    post :create, echo: attribute_for(:echo)
+    expect{
+      post :create, echo: attributes_for(:echo)
+    }. to change(Echo, :count).by 1
   end
 
   it "creates an array of echos and marks each for a social network"
