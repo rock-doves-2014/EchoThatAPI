@@ -2,6 +2,15 @@ class EchosController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create
+    args = Echo.to_args(params)
+    creds = User.to_args(params)[:google_credentials]
+    user = User.find_by(google_credentials: creds)
+    outlets = user.accounts
+    echos = Echo.build_for_each_outlet(outlets, args)
+    echos.each do |e|
+      user.echos << e
+    end
+
     hashtext = JSON.parse(params.first[0])
     user = User.find_by(google_credentials: hashtext['google_credentials'])
     $client = Twitter::REST::Client.new do |config|
@@ -11,6 +20,7 @@ class EchosController < ApplicationController
       config.access_token_secret = user.twitter_token_secret
     end
     $client.update("#{hashtext['message']} - #{hashtext['url']}")
+
     render status: 200
   end
 
