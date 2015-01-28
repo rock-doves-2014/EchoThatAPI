@@ -19,6 +19,20 @@ class Echo < ActiveRecord::Base
     self.update_attribute(:short_url, salt + id_part)
   end
 
+  def self.build_for_each_outlet(outlets, args)
+    echos = []
+    outlets.each do |account|
+      unless args[:is_draft]
+        to_send = Echo.new(Echo.echo_params(args))
+        to_send.sent_to_account = account
+        echos << to_send
+      end
+      draft = Echo.new(echo_params(args))
+      echos << draft
+    end
+    echos
+  end
+
   private
 
   def self.sanitize_json(json_obj)
