@@ -15,6 +15,12 @@ class UsersController < ApplicationController
     render json: answer
   end
 
+  def update
+    user = User.find_by(google_credentials: params['google_credentials'])
+    user.update(twitter_token: params['oauth_token'], twitter_token_secret: params['oauth_verifier'])
+    render html: "<strong>Done. Get on tweeting!</strong>".html_safe
+  end
+
   def destroy
 
   end
