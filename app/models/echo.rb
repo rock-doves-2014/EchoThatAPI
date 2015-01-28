@@ -22,22 +22,16 @@ class Echo < ActiveRecord::Base
   def self.build_for_each_outlet(outlets, args)
     echos = []
     outlets.each do |site|
-      unless args[:is_draft]
+      if !args[:is_draft]
         to_send = Echo.new(Echo.echo_params(args))
         to_send.send_to_venue = site
         echos << to_send
+      else
+        draft = Echo.new(echo_params(args))
+        echos << draft
       end
-      draft = Echo.new(echo_params(args))
-      echos << draft
     end
     echos
-  end
-
-  def update_if_twitter(client)
-    if !(is_draft) && send_to_venue == "twitter"
-      client.update("#{body} #{short_url}")
-    end
-    return send_to_venue
   end
 
   private
@@ -46,7 +40,7 @@ class Echo < ActiveRecord::Base
     received = JSON.parse(json_obj.first[0])
     hash = {}
     hash[:is_draft] = received.fetch("is_draft", false)
-    hash[:body] = received.fetch("body", "")
+    hash[:body] = received.fetch("message", "")
 
     hash[:long_url] = self.sanitize_url( received.fetch("url") )
 

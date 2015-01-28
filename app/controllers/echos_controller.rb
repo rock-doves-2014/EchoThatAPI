@@ -11,7 +11,7 @@ class EchosController < ApplicationController
     echos.each {|e| user.echos << e}
 
     client = init_twitter(user)
-    echos.each{|e| e.update_if_twitter(client)}
+    echos.each{|e| update_if_twitter(client, e)}
 
     render status: 200
   end
@@ -35,6 +35,13 @@ class EchosController < ApplicationController
       config.access_token_secret = user.twitter_token_secret
     end
     client
+  end
+
+  def update_if_twitter(client, echo)
+    if !(echo.is_draft) && echo.send_to_venue == "twitter"
+      client.update("#{echo.body} #{expand_url(echo.short_url)}")
+    end
+    return echo.send_to_venue
   end
 
 end
