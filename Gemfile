@@ -21,10 +21,12 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-#social media gems
-gem 'twitter'
-
+# Twitter gems
 gem 'omniauth-twitter'
+gem 'twitter'
+# Facebook gems
+gem 'omniauth-facebook'
+gem "koala", "~> 1.11.0rc"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
