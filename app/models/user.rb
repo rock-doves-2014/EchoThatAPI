@@ -21,11 +21,6 @@ class User < ActiveRecord::Base
     return accounts.compact
   end
 
-  def self.get_by_credentials(json_params)
-    creds = JSON.parse(params.first[0])["google_credentials"]
-    User.find_by(google_credentials: creds)
-  end
-
   private
 
   def self.sanitize_json(json_params)
@@ -36,6 +31,7 @@ class User < ActiveRecord::Base
     safe_args[:facebook_on] = hash.fetch("facebook_on", true)
     safe_args[:facebook_char_floor] = hash.fetch("facebook_char_floor", true)
     safe_args[:always_link] = hash.fetch("always_link", true)
+    safe_args[:google_credentials] = hash.fetch("google_credentials")
 
     user_args = self.user_params_only(safe_args)
     {:user => user_args}
