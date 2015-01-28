@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   end
 
   def twitter_history
-    echos.select{|e| e.sent_to_venue.downcase == "twitter"}
+    echos.select{|e| e.send_to_venue.downcase == "twitter"}
   end
 
   def self.to_args(json_params)
