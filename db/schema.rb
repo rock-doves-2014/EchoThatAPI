@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150128160203) do
+ActiveRecord::Schema.define(version: 20150128220613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,8 +28,6 @@ ActiveRecord::Schema.define(version: 20150128160203) do
   add_index "echos", ["short_url"], name: "index_echos_on_short_url", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string  "twitter_acct"
-    t.string  "facebook_acct"
     t.boolean "twitter_on"
     t.boolean "facebook_on"
     t.integer "facebook_char_floor"
@@ -40,6 +38,8 @@ ActiveRecord::Schema.define(version: 20150128160203) do
     t.string  "twitter_name"
     t.text    "google_credentials"
     t.string  "chrome_token"
+    t.string  "facebook_token"
+    t.string  "facebook_token_secret"
   end
 
   add_index "users", ["chrome_token"], name: "index_users_on_chrome_token", unique: true, using: :btree
