@@ -17,12 +17,12 @@ class Echo < ActiveRecord::Base
   private
 
   def self.sanitize_json(json_obj)
-    received = JSON.parse json_obj.first[0]
+    received = JSON.parse(json_obj.first[0])
     hash = {}
     hash[:is_draft] = received.fetch("is_draft", true)
     hash[:body] = received.fetch("body", "")
 
-    hash[:long_url] = received.sanitize_url( received.fetch("url") )
+    hash[:long_url] = self.sanitize_url( received.fetch("url") )
 
     return hash
   end

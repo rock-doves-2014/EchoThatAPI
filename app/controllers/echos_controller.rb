@@ -2,7 +2,7 @@ class EchosController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create
-    args = Echo.to_args(params.first[0])
+    args = Echo.to_args(params)
 
 
     # hashtext = JSON.parse(params.first[0])
