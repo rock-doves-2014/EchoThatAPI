@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    t_cred = request.env['omniauth.auth'].credentials
     user = User.find_by(google_credentials: params['google_credentials'])
     user.update(twitter_token: t_cred['token'], twitter_token_secret: t_cred['secret'])
     render html: "<strong>Done. Get on tweeting!</strong>".html_safe
