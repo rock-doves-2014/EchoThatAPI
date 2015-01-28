@@ -8,4 +8,11 @@ RSpec.describe EchosController, :type => :controller do
     expect(assigns(:echo)).to eq echo
     expect(response).to redirect_to "https://www.google.com"
   end
+
+  it "creates a new echo with correct defaults" do
+    post :create, echo: attribute_for(:echo)
+  end
+
+  it "creates an array of echos and marks each for a social network"
+
 end
