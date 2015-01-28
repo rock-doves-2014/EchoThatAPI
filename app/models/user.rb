@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :echos
+  before_save :account_defaults
 
   def drafts
     echos.select{|e| e.is_draft}
@@ -16,8 +17,8 @@ class User < ActiveRecord::Base
 
   def accounts
     accounts = []
-    accounts << twitter_acct
-    accounts << facebook_acct
+    accounts << "twitter" if twitter_on
+    accounts << "facebook" if facebook_on
     return accounts.compact
   end
 
@@ -34,7 +35,7 @@ class User < ActiveRecord::Base
     safe_args[:google_credentials] = hash.fetch("google_credentials")
 
     user_args = self.user_params_only(safe_args)
-    {:user => user_args}
+    return user_args
   end
 
   def self.user_params_only(json_hashified)
@@ -45,5 +46,10 @@ class User < ActiveRecord::Base
   def self.generate_token
     ary = (0..9).to_a + ('a'..'z').to_a
     ary.shuffle.slice(0, 25).join
+  end
+
+  def account_defaults
+    self.twitter_on = true unless self.twitter_on == false
+    self.facebook_on = true unless self.facebook_on == false
   end
 end
