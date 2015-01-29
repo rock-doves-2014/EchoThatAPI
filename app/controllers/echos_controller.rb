@@ -10,8 +10,11 @@ class EchosController < ApplicationController
     echos = Echo.build_for_each_outlet(outlets, args_echo)
     echos.each {|e| user.echos << e}
 
-    client = init_twitter(user)
-    echos.each{|e| update_if_twitter(client, e)}
+    twitter_client = init_twitter(user)
+    echos.each{|e| update_if_twitter(twitter_client, e)}
+
+    facebook_client = init_facebook(user)
+    echos.each{|e| update_if_facebook(facebook_client, e)}
 
     render status: 200
   end
@@ -42,6 +45,36 @@ class EchosController < ApplicationController
       client.update("#{echo.body} #{expand_url(echo.short_url)}")
     end
     return echo.send_to_venue
+  end
+
+    def init_facebook(user)
+    Koala::Facebook::API.new(user.facebook_token, ENV["FACEBOOK_SECRET"])
+  end
+
+  def update_if_facebook(client, echo)
+    if !(echo.is_draft) && echo.send_to_venue == "facebook"
+      # p "INSIDE THE UPDATE"
+      # p echo
+      # p "*******************"
+      # p echo.send_to_venue
+      # p "*******************"
+      # p "#{echo.body} #{expand_url(echo.short_url)}"
+      # p "*******************"
+      # p client
+      # p "*******************"
+      # p client.methods.sort
+      # p "*******************"
+      # user = client.get_object("me")
+      # p user
+
+
+      #Steven, these commands, to post out to facebook, are not working. Twitter posts, facebook does not.
+      #the print statements above lead us to believe that we have the client set up correctly.
+      #It's just our "post to wall" calls that are failing.
+      client.put_wall_post("Hello there!")
+      client.put_connections("me", "feed", :message => "#{echo.body} #{expand_url(echo.short_url)}")
+    end
+    # return echo.send_to_venue
   end
 
 end
