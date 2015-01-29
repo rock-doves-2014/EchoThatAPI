@@ -16,8 +16,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    credentials = request.env['omniauth.auth'].credentials
-    user = User.find_by(google_credentials: params['google_credentials'])
+    credentials = request.env['omniauth.auth']["google_credentials"]
+    user = User.find_by(google_credentials: params['google_credentials']) || User.find_by(google_credentials: credentials)
+
     if params['provider'] == 'twitter'
       user.update(twitter_token: credentials['token'], twitter_token_secret: credentials['secret'])
     elsif params['provider'] == 'facebook'
