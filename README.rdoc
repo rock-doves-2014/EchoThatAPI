@@ -1,28 +1,7 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+echoThat is an extension for google chrome that allows users to share across social media networks with just a key stroke and a click. Highlight content, press cmd + e, and send out your echo.
 
-Things you may want to cover:
+This tool allows you to share the curiosities you come across while you work, without interrupting that work. We created it because the native applications for networks like twitter or facebook--and any third party applications we've yet seen--are built to capture your attention.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+We want to help people keep their focus while they keep sending cool stuff out into the world.
