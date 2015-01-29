@@ -16,12 +16,13 @@ class UsersController < ApplicationController
   end
 
   def update
-    credentials = request.env['omniauth.auth']["google_credentials"]
-    user = User.find_by(google_credentials: params['google_credentials']) || User.find_by(google_credentials: credentials)
-
     if params['provider'] == 'twitter'
+      credentials = request.env['omniauth.auth'].credentials
+      user = User.find_by(google_credentials: params['google_credentials'])
       user.update(twitter_token: credentials['token'], twitter_token_secret: credentials['secret'])
     elsif params['provider'] == 'facebook'
+      credentials = request.env['omniauth.auth']["google_credentials"]
+      user = User.find_by(google_credentials: credentials)
       user.update(facebook_token: credentials['token'], facebook_token_secret: "exp: #{credentials['expires_at']}")
     end
     render html: "<strong>Done. Get on posting!!</strong>".html_safe
