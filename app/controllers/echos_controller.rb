@@ -30,6 +30,10 @@ class EchosController < ApplicationController
 
   private
 
+  def init_facebook(user)
+    Koala::Facebook::API.new(user.facebook_token, ENV["FACEBOOK_SECRET"])
+  end
+
   def init_twitter(user)
     client = Twitter::REST::Client.new do |config|
       config.consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
@@ -46,5 +50,12 @@ class EchosController < ApplicationController
     end
     return echo.send_to_venue
   end
+
+    def update_if_facebook(client, echo)
+      if !(echo.is_draft) && echo.send_to_venue == "facebook"
+        client.put_connections("me", "feed", :message => "#{echo.body} #{expand_url(echo.short_url)}")
+      end
+      # return echo.send_to_venue
+    end
 
 end
