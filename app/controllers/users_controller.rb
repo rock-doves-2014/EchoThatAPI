@@ -29,7 +29,7 @@ class UsersController < ApplicationController
       user.facebook_token_secret = "exp: #{credentials['expires_at']}"
       user.save!
     end
-    render "users/update"
+    render text: "Go ahead and post!"
   end
 
   def destroy
