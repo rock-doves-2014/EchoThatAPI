@@ -10,8 +10,11 @@ class EchosController < ApplicationController
     echos = Echo.build_for_each_outlet(outlets, args_echo)
     echos.each {|e| user.echos << e}
 
-    client = init_twitter(user)
-    echos.each{|e| update_if_twitter(client, e)}
+    facebook_client = init_facebook(user)
+    echos.each{|e| update_if_facebook(facebook_client, e)}
+
+    twitter_client = init_twitter(user)
+    echos.each{|e| update_if_twitter(twitter_client, e)}
 
     render status: 200
   end
