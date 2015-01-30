@@ -25,7 +25,9 @@ class UsersController < ApplicationController
       google_email = request.env['omniauth.params']["google_credentials"]
       credentials = request.env['omniauth.auth']['credentials']
       user = User.find_by(google_credentials: google_email)
-      user.update(facebook_token: credentials['token'], facebook_token_secret: "exp: #{credentials['expires_at']}")
+      user.facebook_token = credentials['token']
+      user.facebook_token_secret = "exp: #{credentials['expires_at']}"
+      user.save!
     end
     render "users/update"
   end
