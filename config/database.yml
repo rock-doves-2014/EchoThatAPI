@@ -83,3 +83,4 @@ production:
   database: echo_that_production
   username: echo_that
   password: <%= ENV['ECHO_THAT_DATABASE_PASSWORD'] %>
+  pool:  10
