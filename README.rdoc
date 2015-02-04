@@ -1,7 +1,0 @@
-== README
-
-echoThat is an extension for google chrome that allows users to share across social media networks with just a key stroke and a click. Highlight content, press cmd + e, and send out your echo.
-
-This tool allows you to share the curiosities you come across while you work, without interrupting that work. We created it because the native applications for networks like twitter or facebook--and any third party applications we've yet seen--are built to capture your attention.
-
-We want to help people keep their focus while they keep sending cool stuff out into the world.
