@@ -41,6 +41,7 @@ class Echo < ActiveRecord::Base
     hash = {}
     hash[:is_draft] = received.fetch("is_draft", false)
     hash[:body] = received.fetch("message", "")
+    self.decode_chars(hash[:body])
 
     hash[:long_url] = self.sanitize_url( received.fetch("url") )
 
@@ -53,6 +54,11 @@ class Echo < ActiveRecord::Base
     else
       return url
     end
+  end
+
+  def self.decode_chars(str)
+    str.gsub!("etcode4osqbr", "[")
+    str.gsub!("etcode4csqbr", "]")
   end
 
 end
