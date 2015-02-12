@@ -14,8 +14,8 @@ class Echo < ActiveRecord::Base
   end
 
   def make_short_url
-    salt = (0..5).map{|n| rand(36).to_s(36) }.join
-    id_part = self.id.to_s(36).upcase
+    salt = (0..2).map{|n| rand(36).to_s(36) }.join
+    id_part = self.id.to_s(36).upcase[0..1]
     self.update_attribute(:short_url, salt + id_part)
   end
 
