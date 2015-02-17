@@ -31,8 +31,18 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
+  def update_sharing
+    user = User.find_by(google_credentials: params['google_credentials'])
 
+    if params.fetch('twitterOn', nil) != nil
+      user.update(twitter_on: params['twitterOn'])
+    elsif params.fetch('facebookOn', nil) != nil
+      user.update(facebook_on: params['facebookOn'])
+    end
+    answer = {message: "successfully updated post preferences"}
+    render json: answer
   end
 
+  def destroy
+  end
 end
