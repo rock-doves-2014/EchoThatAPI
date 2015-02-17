@@ -31,6 +31,9 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_sharing
+  end
+
   def destroy
 
   end
