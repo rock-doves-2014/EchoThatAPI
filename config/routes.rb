@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   post '/api/users' => 'users#create'
 
   get '/o/:short_url' => 'echos#expand', as:'expand'
+
+  get 'privacy' => 'support#privacy'
 end
