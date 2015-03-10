@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  before_action :check_token, only: :update_sharing
 
   def new
 
