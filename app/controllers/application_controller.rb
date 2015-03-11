@@ -9,7 +9,7 @@ private
       hashtext = JSON.parse(params.first[0])
       user = User.find_by(google_credentials: hashtext['google_credentials'])
       unless user.chrome_token == hashtext['chrome_token']
-        render status: 401
+        render status: 401 and return
       end
     end
 end
