@@ -11,6 +11,8 @@ class SupportController < ApplicationController
   def create
     @support_email = SupportEmail.new(support_params)
     if @support_email.save
+      msg = @support_email.build_email
+      msg.deliver
       @support_email.update(sent_on: Time.new)
       render "thanks"
     else

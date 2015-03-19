@@ -16,9 +16,9 @@ class SupportEmail < ActiveRecord::Base
   def build_email
     args = {
       :to      =>  self.recipient,
-      :from    =>  self.sender,
       :subject =>  self.subject,
-      :body    =>  self.body
+      :from    =>  self.sender,
+      :body    =>  "#{self.sender} reports:\n #{self.body}"
     }
     Mail.new(args)
   end
