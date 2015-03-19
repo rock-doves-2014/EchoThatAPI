@@ -1,0 +1,14 @@
+<% if @support_email.errors.messages %>
+  <h1>There is at least one problem here...</h1>
+  <ul>
+  <% @support_email.errors.messages.each do |type, msg| %>
+    <li><%= p "#{type}: #{msg*"  "}" %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @support_email, url:bug_reports_path do |f| %>
+  Your email: <%= f.text_field :sender %><br>
+  Describe the Bug:<br> <%= f.text_area :body %><br>
+  <%= f.submit "Submit" %>
+<% end %>
