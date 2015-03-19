@@ -1,14 +1,15 @@
-<% if @support_email.errors.messages %>
-  <h1>There is at least one problem here...</h1>
-  <ul>
-  <% @support_email.errors.messages.each do |type, msg| %>
-    <li><%= p "#{type}: #{msg*"  "}" %></li>
-  <% end %>
-  </ul>
-<% end %>
-
 <%= form_for @support_email, url:bug_reports_path do |f| %>
-  Your email: <%= f.text_field :sender %><br>
-  Describe the Bug:<br> <%= f.text_area :body %><br>
-  <%= f.submit "Submit" %>
+
+  <% if !@support_email.errors.messages.empty? %>
+    <h1>There is at least one problem here...</h1>
+    <ul>
+    <% @support_email.errors.messages.each do |type, msg| %>
+      <li><%= p "#{type.capitalize}: #{msg*"  "}" %></li>
+    <% end %>
+    </ul>
+  <% end %>
+
+  <h4>Your email:</h4> <%= f.text_field :sender %><br>
+  <h4>Describe the Bug:</h4><br> <%= f.text_area :body %><br>
+  <%= f.submit "Submit", :class => "button" %>
 <% end %>
