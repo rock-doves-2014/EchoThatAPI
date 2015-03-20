@@ -11,4 +11,7 @@ Rails.application.routes.draw do
   get '/o/:short_url' => 'echos#expand', as:'expand'
 
   get 'privacy' => 'support#privacy'
+  get   'bug_report' => 'support#new'
+  post  'bug_reports' => 'support#create'
+  get   'bug_reports' => 'support#thanks'
 end

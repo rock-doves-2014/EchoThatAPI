@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309150052) do
+ActiveRecord::Schema.define(version: 20150318212048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contact_forms", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "echos", force: :cascade do |t|
     t.integer  "user_id"
@@ -28,6 +33,25 @@ ActiveRecord::Schema.define(version: 20150309150052) do
   end
 
   add_index "echos", ["short_url"], name: "index_echos_on_short_url", unique: true, using: :btree
+
+  create_table "support_emails", force: :cascade do |t|
+    t.string   "subject"
+    t.text     "body",       null: false
+    t.string   "sender",     null: false
+    t.string   "recipient",  null: false
+    t.datetime "sent_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "support_issues", force: :cascade do |t|
+    t.string   "sender",     null: false
+    t.text     "body"
+    t.string   "to"
+    t.string   "subject"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.boolean  "twitter_on"
