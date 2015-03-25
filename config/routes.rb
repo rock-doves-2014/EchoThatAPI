@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   get   'bug_report' => 'support#new'
   post  'bug_reports' => 'support#create'
   get   'bug_reports' => 'support#thanks'
+
+  get '/bugs', '/bugreport', '/report', 'bug-report', to: redirect('/bug_report')
 end
