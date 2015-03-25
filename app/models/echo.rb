@@ -14,8 +14,8 @@ class Echo < ActiveRecord::Base
   end
 
   def make_short_url
-    salt = (0..5).map{|n| rand(36).to_s(36) }.join
-    id_part = self.id.to_s(36).upcase
+    salt = (0..2).map{|n| rand(36).to_s(36) }.join
+    id_part = self.id.to_s(36).upcase[0..1]
     self.update_attribute(:short_url, salt + id_part)
   end
 
@@ -41,6 +41,7 @@ class Echo < ActiveRecord::Base
     hash = {}
     hash[:is_draft] = received.fetch("is_draft", false)
     hash[:body] = received.fetch("message", "")
+    self.decode_chars(hash[:body])
 
     hash[:long_url] = self.sanitize_url( received.fetch("url") )
 
@@ -53,6 +54,11 @@ class Echo < ActiveRecord::Base
     else
       return url
     end
+  end
+
+  def self.decode_chars(str)
+    str.gsub!("etcode4osqbr", "[")
+    str.gsub!("etcode4csqbr", "]")
   end
 
 end

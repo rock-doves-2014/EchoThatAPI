@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :verify_authenticity_token
+  before_action :check_token, only: :update_sharing
 
   def new
 
@@ -29,11 +30,21 @@ class UsersController < ApplicationController
       user.facebook_token_secret = "exp: #{credentials['expires_at']}"
       user.save!
     end
-    render text: "Go ahead and post!"
+  end
+
+  def update_sharing
+    hashtext = JSON.parse(params.first[0])
+    user = User.find_by(google_credentials: hashtext['google_credentials'])
+
+    if hashtext['outlet'] == 'twitterOn'
+      user.update(twitter_on: hashtext['booleanTerm'])
+    elsif hashtext['outlet'] == 'facebookOn'
+      user.update(facebook_on: hashtext['booleanTerm'])
+    end
+    answer = {message: "successfully updated post preferences"}
+    render json: answer
   end
 
   def destroy
-
   end
-
 end
