@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   get '/bugs', '/bugreport', '/report', 'bug-report', to: redirect('/bug_report')
 
   get '/termsofservice' => 'support#terms'
+  get '/terms', to: redirect('/termsofservice')
 
 end
