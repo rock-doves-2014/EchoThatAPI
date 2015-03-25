@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'dotenv-rails', :groups => [:development, :test]
-gem 'bitly'
 gem 'mail', '~> 2.6.3'
 gem 'figaro', '~> 1.1.0'
 
